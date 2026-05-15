@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Datasets / large files (re-download when needed)
+datasets/
+data/
+*.tgz
+*.tar.gz
+*.zip
+*.csv
+*.tsv
+
+# Trained model artefacts
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+models/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
