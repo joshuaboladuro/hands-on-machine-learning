@@ -33,7 +33,7 @@ np.random.seed(42)
 train_data = pd.read_csv("classification/train.csv")
 test_data = pd.read_csv("classification/test.csv")
 
-#2) inspect the data
+#2) inspect, clean and encode the data
 #print(train_data.head().to_string())
 #print(train_data.info()) # Expected: 889 samples. Age: 714, Cabin: 204, Embarked: 889
 #print(train_data.describe())
@@ -47,6 +47,11 @@ train_data_clean = train_data_clean.dropna(subset=["Embarked"])
 median_age = train_data_clean['Age'].median()
 train_data_clean["Age"] = train_data_clean["Age"].fillna(median_age)
 
+train_data_clean["Sex"] = train_data_clean["Sex"].map({"male":0, "female": 1})
+train_data_clean = pd.get_dummies(train_data_clean, columns=["Embarked"])
+train_data_clean["Embarked_C"] = train_data_clean["Embarked_C"].map({False:0, True: 1})
+train_data_clean["Embarked_Q"] = train_data_clean["Embarked_Q"].map({False:0, True: 1})
+train_data_clean["Embarked_S"] = train_data_clean["Embarked_S"].map({False:0, True: 1})
 
-print(train_data_clean.shape)
-print(train_data_clean.info())
+train_data_clean = train_data_clean.drop(columns=["PassengerId", "Name", "Ticket"])
+print (train_data_clean.head().to_string())
