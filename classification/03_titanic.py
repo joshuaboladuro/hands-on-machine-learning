@@ -40,15 +40,13 @@ test_data = pd.read_csv("classification/test.csv")
 #print(train_data.shape)
 
 #Next steps:
-#Remove Cabin column (204) 
-#Remove additional Embarked rows (2)
-#Remove Age values (177)
+#Remove Cabin column (204), Remove additional Embarked rows (2), Reomve Age values (177) rows
+train_data_clean = train_data.drop(columns = ["Cabin"])
+#print(train_data_clean[train_data_clean['Embarked'].isna()].to_string())
+train_data_clean = train_data_clean.dropna(subset=["Embarked"])
+median_age = train_data_clean['Age'].median()
+train_data_clean["Age"] = train_data_clean["Age"].fillna(median_age)
 
-train_data_aug = train_data.drop(columns = ["Cabin"])
-print(train_data_aug.shape)
 
-
-print(train_data_aug.info())
-
-print(train_data_aug.shape)
-print(train_data_aug["Embarked"].isna().sum())
+print(train_data_clean.shape)
+print(train_data_clean.info())
