@@ -75,7 +75,12 @@ models = [
 
 for name, clf in models:
     score = cross_val_score(clf, train_x, train_y, cv=5, scoring="accuracy")
-    print(f"{name} accuracy: {score.mean().round(2)}")
+    print(f"{name} accuracy: {score.mean():.2f}")
+'''
+Logistic Regression accuracy: 0.79
+Random Forest accuracy: 0.82 (Winner)
+SVM accuracy: 0.67
+'''
 
 
 
