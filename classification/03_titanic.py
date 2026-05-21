@@ -53,13 +53,31 @@ titanic_data_clean["Embarked_Q"] = titanic_data_clean["Embarked_Q"].map({False:0
 titanic_data_clean["Embarked_S"] = titanic_data_clean["Embarked_S"].map({False:0, True: 1})
 titanic_data_clean = titanic_data_clean.drop(columns=["PassengerId", "Name", "Ticket"])
 
-print (titanic_data_clean.head().to_string())
-
 #3) split into X and y and train test split
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.model_selection import cross_val_score
 
 train_y = titanic_data_clean["Survived"]
 train_x = titanic_data_clean.drop(columns=["Survived"])
 test_x = pd.read_csv("classification/test.csv")
+
+log_clf = LogisticRegression(max_iter=1000)
+rf_clf = RandomForestClassifier(random_state=42)
+svc_clf = SVC()
+
+models = [
+    ["Logistic Regression", log_clf], 
+    ["Random Forest", rf_clf], 
+    ["SVM", svc_clf]
+    ]
+
+for name, clf in models:
+    score = cross_val_score(clf, train_x, train_y, cv=5, scoring="accuracy")
+    print(f"{name} accuracy: {score.mean().round(2)}")
+
+
 
 
 
