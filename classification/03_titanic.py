@@ -44,4 +44,9 @@ SVM accuracy: 0.67
 '''
 
 rf_clf.fit(train_x, train_y)
+preds = rf_clf.predict(test_clean)
+submission = pd.DataFrame({"PassengerId": test_ids, "Survived": preds})
+submission.to_csv("classification/submission.csv", index=False)
+print("Submission file created successfully.")
+
 
