@@ -6,6 +6,8 @@ Build a spam classifier (a more challenging exercise).
 a. Download examples of spam and ham from Apache SpamAssassin's public
    datasets (https://homl.info/spamassassin).
 b. Unzip the datasets and familiarise yourself with the data format.
+
+
 c. Split the data into a training set and a test set.
 d. Write a data preparation pipeline to convert each email into a feature
    vector. Each email becomes a (sparse) vector indicating which words are
