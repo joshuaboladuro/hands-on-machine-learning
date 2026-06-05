@@ -1,4 +1,4 @@
- """
+"""
 Chapter 3 - Exercise 4: Spam Classifier
 
 Build a spam classifier (a more challenging exercise).
@@ -27,6 +27,7 @@ Approach / notes
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from pathlib import Path 
 
 np.random.seed(42)
 
@@ -36,3 +37,25 @@ np.random.seed(42)
 
 if __name__ == "__main__":
     pass
+
+from pathlib import Path 
+
+spam_dir = list(Path("classification/spam").iterdir())
+ham_dir = list(Path("classification/easy_ham").iterdir())
+
+spam_count = len(spam_dir)
+ham_count = len(ham_dir)
+
+print(f"Spam count: {spam_count}")
+print(f"Ham count: {ham_count}")
+
+#split into train and test sets (80% train, 20% test)
+spam_train = spam_dir[:int(0.8 * spam_count)]
+ham_train = ham_dir[:int(0.8 * ham_count)]
+spam_test = spam_dir[int(0.8 * spam_count):]
+ham_test = ham_dir[int(0.8 * ham_count):]
+
+
+
+
+
