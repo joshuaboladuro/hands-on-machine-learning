@@ -3,12 +3,7 @@ Chapter 3 - Exercise 4: Spam Classifier
 
 Build a spam classifier (a more challenging exercise).
 
-a. Download examples of spam and ham from Apache SpamAssassin's public
-   datasets (https://homl.info/spamassassin).
-b. Unzip the datasets and familiarise yourself with the data format.
 
-
-c. Split the data into a training set and a test set.
 d. Write a data preparation pipeline to convert each email into a feature
    vector. Each email becomes a (sparse) vector indicating which words are
    present (e.g. [1, 0, 0, 1, ...] means word #1 and word #4 are present).
@@ -40,14 +35,20 @@ if __name__ == "__main__":
 
 from pathlib import Path 
 
-spam_dir = list(Path("classification/spam").iterdir())
-ham_dir = list(Path("classification/easy_ham").iterdir())
+spam_dir = [
+    p for p in Path("classification/spam").iterdir()
+    if "Zone.Identifier" not in p.name
+    ]
+ham_dir = [
+    p for p in Path("classification/easy_ham").iterdir()
+    if "Zone.Identifier" not in p.name
+    ]
 
 spam_count = len(spam_dir)
 ham_count = len(ham_dir)
 
-print(f"Spam count: {spam_count}")
-print(f"Ham count: {ham_count}")
+#print(f"Spam count: {spam_count}")
+#print(f"Ham count: {ham_count}")
 
 #split into train and test sets (80% train, 20% test)
 spam_train = spam_dir[:int(0.8 * spam_count)]
@@ -56,6 +57,13 @@ spam_test = spam_dir[int(0.8 * spam_count):]
 ham_test = ham_dir[int(0.8 * ham_count):]
 
 
+# convert emails to feature vectors 
+def read_email(file):
+    with open(file, "r", encoding="latin-1") as f:
+        return f.read()
 
-
+#print(spam_dir[100])
+#print(read_email(spam_dir[100]))  
+print(spam_dir[0])
+print(read_email(spam_dir[1]))
 
