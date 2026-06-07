@@ -47,9 +47,6 @@ ham_dir = [
 spam_count = len(spam_dir)
 ham_count = len(ham_dir)
 
-#print(f"Spam count: {spam_count}")
-#print(f"Ham count: {ham_count}")
-
 #split into train and test sets (80% train, 20% test)
 spam_train = spam_dir[:int(0.8 * spam_count)]
 ham_train = ham_dir[:int(0.8 * ham_count)]
@@ -61,9 +58,17 @@ ham_test = ham_dir[int(0.8 * ham_count):]
 def read_email(file):
     with open(file, "r", encoding="latin-1") as f:
         return f.read()
+    
 
-#print(spam_dir[100])
-#print(read_email(spam_dir[100]))  
-print(spam_dir[0])
-print(read_email(spam_dir[1]))
+x_train = [read_email(file) for file in spam_train + ham_train]
+y_train = [1] * len(spam_train) + [0] * len(ham_train)
+x_test = [read_email(file) for file in spam_test + ham_test]
+y_test = [1] * len(spam_test) + [0] * len(ham_test)
 
+
+from sklearn.feature_extraction.text import CountVectorizer
+
+vectorizer = CountVectorizer()
+x_train_vectors = vectorizer.fit_transform(x_train)
+
+print(x_train_vectors.shape)
